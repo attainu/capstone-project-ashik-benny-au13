@@ -3,14 +3,16 @@ const router = express.Router();
 
 const {getAllProducts,newProduct,getOneProduct,updateOneProduct,deleteOneProduct} = require('../controllers/productController');
 
+const { isAutherisedUser,userRoles } = require('../middlewares/verifiedUser')
 
-// INDIVUDUAL ROUTES
+
 
 router.route('/products').get(getAllProducts);
 router.route('/product/:id').get(getOneProduct);
-router.route('/admin/product/new').post(newProduct);
-router.route('/admin/product/:id').put(updateOneProduct);
-router.route('/admin/product/:id').delete(deleteOneProduct);
+
+router.route('/admin/product/new').post(isAutherisedUser, userRoles('admin'), newProduct);
+router.route('/admin/product/:id').put(isAutherisedUser, userRoles('admin'), updateOneProduct);
+router.route('/admin/product/:id').delete(isAutherisedUser, userRoles('admin'), deleteOneProduct);
 
 
 module.exports = router;

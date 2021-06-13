@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 
 
 const userSchema = new mongoose.Schema({
@@ -19,9 +20,9 @@ const userSchema = new mongoose.Schema({
         type : String,
         select : false,
         required : [true, 'Please Enter your password'] ,
-        minlength : [5, 'Password needs a minimum charcter length of 4']
+        minlength : [5, 'Password needs a minimum charcter length of 5']
     },
-    avatar : {
+    image : {
         public_id: {
             type:String,
             required : true
@@ -34,28 +35,55 @@ const userSchema = new mongoose.Schema({
     role : {
         type : String,
         default : 'user'
-        },
+    },
     createdAt : {
         type : String,
         default : Date.Now
-        },
-    resetPasswordToken : String,
-    resetPasswordExpire : Date
-});
+    },
+    // PasswordResetToken : String,
+    // PasswordResetExpires : Date
+    resetPasswordToken: String,
+    resetPasswordExpire: Date
 
+});
 
 // Password encryption & salting before saving the userSchema
 userSchema.pre('save', async function (next) {
-    if(!this.isModified ('password')) next();
+    if (!this.isModified('password')) {
+        next()
+    }
     this.password = await bcrypt.hash(this.password, 10)
 });
 
 
+// password compairing
+userSchema.methods.comparePassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password)
+}
+
+
+
 // Creating jwt for user
-userSchema.methods.getJwtToken = function() {
+userSchema.methods.createJwtToken = function() {
     return jwt.sign({ id:this._id }, 'ashben2021', {
         expiresIn : '3d'
     });
+};
+
+
+// Password Reset Token
+userSchema.methods.generatePasswordResetToken = function () {
+
+    // Token Genaration
+    const resetToken = crypto.randomBytes(20).toString('hex');              // crypto generate random bytes
+
+    // Token encryption
+    this.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex')   // digest authentication
+
+    // setting token expiry
+    this.resetPasswordExpire = Date.now() + 30 * 60 * 1000
+
+    return resetToken
 };
 
 

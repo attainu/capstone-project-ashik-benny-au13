@@ -6,6 +6,9 @@ const apiFeatures = require('../utils/apiFeatures');
 //CREATING NEW PRODUCT
 
 exports.newProduct = async (req,res,next) => {
+
+    req.body.user = req.user.id;                        // getting the id of loggedin user
+
     const product = await Product.create(req.body)
 
     res.status(201).json({
@@ -50,7 +53,7 @@ exports.getOneProduct = async (req,res,next) => {
 // UPDATING A PRODUCT
 
 exports.updateOneProduct = async (req,res,next) => {
-        let product = await Product.findById(req.params.id)
+    let product = await Product.findById(req.params.id)
 
     if(!product) {
         return next(new errorHandler('Product Not Found', 404))

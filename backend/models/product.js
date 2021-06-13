@@ -77,6 +77,11 @@ const productSchema = new mongoose.Schema({
             }
         }
     ],
+    user : {                                        // to save the userid that has created the product
+        type : mongoose.Schema.ObjectId,
+        ref : 'User',
+        required : true
+    },
     createdAt: {
         type: Date,
         default: Date.now
