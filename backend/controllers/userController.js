@@ -134,7 +134,7 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
     //Compairing this passwordReset Token with passwordResetToken in database
     const user = await User.findOne({
         resetPasswordToken,
-        resetPasswordExpire: { $gt: Date.now() }
+        // resetPasswordExpire: { $gt: Date.now() }
     })
 
     if (!user) {
@@ -254,8 +254,7 @@ exports.updateUserDetails = async (req, res, next) => {
         role : req.body.role
     };
     const user = await User.findByIdAndUpdate(req.params.id, updatedUserData, {
-        // new : true,
-        // runValidators : true,
+
         useFindAndModify: false
     })
     res.status(200).json({
@@ -267,7 +266,6 @@ exports.updateUserDetails = async (req, res, next) => {
 
 
 // DELETE USER (BY ADMIN)
-
 
 exports.deleteUser = catchAsyncErrors(async (req,res,next) => {
     const user = await User.findById(req.params.id);

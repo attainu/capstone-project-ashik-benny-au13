@@ -11,7 +11,7 @@ const sendEmailToUser = async options => {
       });
 
     const message = {
-        from :"Ecommerce App <noreplay@gmail.com>" ,
+        from :"Ecommerce App" ,
         to : options.email,
         subject : options.subject,
         text : options.message
