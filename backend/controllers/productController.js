@@ -24,10 +24,16 @@ exports.newProduct = async (req,res,next) => {
 
 exports.getAllProducts = async (req,res,next) => {
 
-    const features = new apiFeatures(Product.find(), req.query)
-        .search()                                                       // for keyword search
+    const productsPerPage = 3;
+    
+    // FE ALERT !! : PRODUCT COUNT //
 
-    const products = await features.query
+    const features = new apiFeatures(Product.find(), req.query)
+        .search()                                                   // for keyword search
+        .filter()                                                   // filter by category/price/ratings etc..
+        .pagination(productsPerPage)                                // to decide howmany products need to dsipaly & skip
+
+    const products = await features.query;
 
     res.status(200).json ({
         sucess : true,
