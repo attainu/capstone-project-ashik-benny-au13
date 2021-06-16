@@ -1,14 +1,18 @@
-import React from 'react'
+import React,{Fragment} from 'react'
+import MetaData from './layout/MetaData'
 
 const Home = () => {
     return (
-    <div className="container container-fluid">
+        <Fragment>
+            <MetaData title = {'Buy best product online'} />
+
+
         <h1 id ="product_heading">Latest Products</h1>
-        <section id="products" className="container mt-5">
-            <div className="row">
-                <div className="col-sm-12 col-md-6 col-lg-3 my-3">
-                    <div className="card p-3 rounded">
-                        <img className="card-img-top mx-auto"
+            <section id="products" className="container mt-5">
+                <div className="row">
+                    <div className="col-sm-12 col-md-6 col-lg-3 my-3">
+                        <div className="card p-3 rounded">
+                            <img className="card-img-top mx-auto"
                             src="https://images-na.ssl-images-amazon.com/images/I/81NoPCOJh%2BL._SL1500_.jpg"/>
                     <div className="card-body d-flex flex-column">
                         <h5 className="card-title">
@@ -27,7 +31,8 @@ const Home = () => {
             </div>
         </div>
         </section>
-    </div>
+        
+    </Fragment>
     )
 }
 export default Home

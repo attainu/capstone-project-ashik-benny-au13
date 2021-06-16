@@ -7,7 +7,7 @@ const Header = () => {
     
 
     return (
-       
+        <Fragment>
             <nav className="navbar row">
                 <div className="col-12 col-md-3">
                     <div className="navbar-brand">
@@ -36,7 +36,8 @@ const Header = () => {
                         <span id="cart" className="ml-3">Cart</span>
                         <span className="ml-1" id="cart_count">1</span>
                 </div>
-            </nav>  
+            </nav>
+        </Fragment>
     
     )
 }
