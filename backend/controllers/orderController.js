@@ -31,9 +31,9 @@ exports.createNewOrder = catchAsyncErrors(async (req,res,next) => {
 // TO SEE THE SINGLE ORDER DETAILS
 
 
-exports.getOrderDetails = catchAsyncErrors(async (req,res,next) => {
+exports.getSingleOrder  = catchAsyncErrors(async (req,res,next) => {
 
-    const order = await Order.findById(req.params.id) //.populate('user', 'name email');
+    const order = await Order.findById(req.params.id).populate('user', 'name email');
 
     if(!order) {
         return next(new errorHandler('No orders found for this user', 404))
@@ -50,7 +50,7 @@ exports.getOrderDetails = catchAsyncErrors(async (req,res,next) => {
 // TO SEE OWN ORDERS
 
 
-exports.myOrderDetails = catchAsyncErrors(async (req,res,next) => {
+exports.myOrders  = catchAsyncErrors(async (req,res,next) => {
 
     // const myOrders = await Order.find({ id: req.user.id })
     const myOrders = await Order.find()
@@ -67,7 +67,7 @@ exports.myOrderDetails = catchAsyncErrors(async (req,res,next) => {
 // GET ALL ORDERS & TOTAL PRICE (BY ADMIN)
 
 
-exports.getAllOrderDetails = catchAsyncErrors(async (req,res,next) => {
+exports.allOrders = catchAsyncErrors(async (req,res,next) => {
 
     const allOrders = await Order.find();
 
@@ -102,7 +102,7 @@ exports.updateOrder = catchAsyncErrors(async (req, res, next) => {
     })
 
     order.orderStatus = req.body.orderStatus,
-        order.deliveredDate = Date.now()
+        order.deliveredAt = Date.now()
 
     await order.save()
 

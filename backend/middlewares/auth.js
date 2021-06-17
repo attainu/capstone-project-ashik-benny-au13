@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken')
 
 // checking for autherised person to access particular routes
 
-exports.isAutherisedUser = catchAsyncErrors(async (req, res, next) => {
+exports.isAuthenticatedUser  = catchAsyncErrors(async (req, res, next) => {
     
     const { token } = req.cookies
 
@@ -25,7 +25,7 @@ exports.isAutherisedUser = catchAsyncErrors(async (req, res, next) => {
 
 // user roles HANDLING
 
-exports.userRoles = (...roles) => {
+exports.authorizeRoles = (...roles) => {
     return(req,res,next) => {
         if(!roles.includes(req.user.role)) {
             return next(new ErrorHandler('You are not allowed to access this task!!',403))

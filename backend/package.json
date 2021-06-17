@@ -7,7 +7,7 @@
     "start": "node server.js",
     "dev": "SET NODE_ENV=DEVELOPMENT& nodemon backend/server",
     "prod": "SET NODE_ENV=PRODUCTION& nodemon backend/server",
-    "addToDb": "node utils/addDataToDb.js"
+    "addToDb": "node utils/addToDb.js"
   },
   "author": "Ashik & Subodh",
   "license": "ISC",

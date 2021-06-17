@@ -1,9 +1,9 @@
 
 
-const sendJwtToken = (user,statuscode,res) => {
+const sendToken  = (user,statuscode,res) => {
 
     // creating JWT
-    const jwtToken = user.createJwtToken();
+    const Token = user.getJwtToken();
 
     // cookie
     const options = {
@@ -11,13 +11,13 @@ const sendJwtToken = (user,statuscode,res) => {
         httpOnly : true                                                 
     };
 
-    res.status(statuscode).cookie('token', jwtToken, options).json({
+    res.status(statuscode).cookie('token', Token, options).json({
         sucess : true,
-        jwtToken,
+        Token,
         user
     });
 
 };
 
 
-module.exports = sendJwtToken
+module.exports = sendToken;

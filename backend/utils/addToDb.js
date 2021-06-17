@@ -10,7 +10,7 @@ const products = require('../data/products');
 
 connectDatabase();
 
-const addProducts = async () => {
+const seedProducts  = async () => {
     try {
 
         await Product.deleteMany();
@@ -27,4 +27,4 @@ const addProducts = async () => {
     }
 }
 
-addProducts()
+seedProducts ()

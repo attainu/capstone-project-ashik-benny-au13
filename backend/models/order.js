@@ -58,8 +58,8 @@ const orderSchema = new mongoose.Schema({
         required : true,
         default : 'processing'
     },
-    createdDate: { type:Date, default:Date.now },
-    deliveredDate: { type:Date }
+    createdAt: { type:Date, default:Date.now },
+    deliveredAt: { type:Date }
     
 });
 

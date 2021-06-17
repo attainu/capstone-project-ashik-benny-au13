@@ -1,15 +1,15 @@
 const User = require('../models/user');
 const errorHandler = require('../utils/errorHandler');
 const catchAsyncErrors = require('../middlewares/catchAsyncErrors.js');
-const sendJwtToken = require('../utils/jwtAndCookie');
-const sendEmailToUser = require('../utils/sendEmailToUser')
+const sendToken = require('../utils/jwtToken');
+const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto');
 
 
 
 // NEW USER REGISTRATION
 
-exports.registerNewUser = catchAsyncErrors( async(req,res,next) => {
+exports.registerUser  = catchAsyncErrors( async(req,res,next) => {
     
     const { name,email,password } = req.body
 
@@ -23,14 +23,14 @@ exports.registerNewUser = catchAsyncErrors( async(req,res,next) => {
 
     
     // calling jwt function
-    sendJwtToken(user,200,res);
+    sendToken(user,200,res);
 });
 
 
 
 // USER LOGIN 
 
-exports.loginUser = catchAsyncErrors(async (req,res,next) => {
+exports.loginUser  = catchAsyncErrors(async (req,res,next) => {
     
     const { email,password } = req.body;
     
@@ -57,7 +57,7 @@ exports.loginUser = catchAsyncErrors(async (req,res,next) => {
     }
    
     // calling jwt function
-    sendJwtToken(user,200,res);
+    sendToken(user,200,res);
     
 });
 
@@ -65,7 +65,7 @@ exports.loginUser = catchAsyncErrors(async (req,res,next) => {
 
 // USER LOGOUT
 
-exports.logoutUser = catchAsyncErrors(async (req,res,next) => {
+exports.logout = catchAsyncErrors(async (req,res,next) => {
     res.cookie('token',null, {
             expires : new Date(Date.now()),
             httpOnly : true 
@@ -90,7 +90,7 @@ exports.forgotPassword = catchAsyncErrors(async (req,res,next) => {
     };
 
     // Genarating the Password Reset token
-    const resetPasswordToken = user.generatePasswordResetToken();
+    const resetPasswordToken = user.getPasswordResetToken();
     await user.save( {validateBeforeSave: false} );
 
     // Create password reset URL
@@ -101,7 +101,7 @@ exports.forgotPassword = catchAsyncErrors(async (req,res,next) => {
 
     // Sending EMail to user 
     try {
-        await sendEmailToUser({
+        await sendEmail({
             email : user.email,
             subject : 'Password Recovery Email',
             message
@@ -152,14 +152,14 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
     await user.save();
 
-    sendJwtToken(user, 200, res)
+    sendToken(user, 200, res)
 });
 
 
 
 // GET USER PROFILE details
 
-exports.userProfile = catchAsyncErrors(async (req,res,next) => {
+exports.getUserProfile = catchAsyncErrors(async (req,res,next) => {
     const user = await User.findById(req.user.id);
 
     res.status(200).json({
@@ -172,7 +172,7 @@ exports.userProfile = catchAsyncErrors(async (req,res,next) => {
 
 // UPDATE USER PROFILE DETAILS
 
-exports.updateUserProfile = catchAsyncErrors(async (req,res,next) =>{
+exports.updateProfile = catchAsyncErrors(async (req,res,next) =>{
     const updatedUserData = {
         name : req.body.name,
         email : req.body.email
@@ -197,7 +197,7 @@ exports.updateUserProfile = catchAsyncErrors(async (req,res,next) =>{
 
 // UPDATE USER PASSWORD
 
-exports.updateUserPassword = catchAsyncErrors(async (req, res, next) => {
+exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
     const user = await User.findById(req.user.id).select('password');
 
     //checking the old password
@@ -208,13 +208,13 @@ exports.updateUserPassword = catchAsyncErrors(async (req, res, next) => {
 
     user.password = req.body.password;
     await user.save();
-    sendJwtToken(user, 200, res);
+    sendToken(user, 200, res);
 });
 
 
 // GET ALL USERS (BY ADMIN)
 
-exports.getAllUsers = catchAsyncErrors(async (req,res,next) => {
+exports.allUsers = catchAsyncErrors(async (req,res,next) => {
     const users = await User.find();
 
     res.status(200).json({
@@ -228,7 +228,7 @@ exports.getAllUsers = catchAsyncErrors(async (req,res,next) => {
 
 // GET SINGLE USER DETAILS (BY ADMIN)
 
-exports.getSingleUserDetails = catchAsyncErrors(async (req,res,next) => {
+exports.getUserDetails = catchAsyncErrors(async (req,res,next) => {
     const user = await User.findById(req.params.id);
 
     if(!user) {
@@ -247,7 +247,7 @@ exports.getSingleUserDetails = catchAsyncErrors(async (req,res,next) => {
 // UPDATE USER DETAILS (BY ADMIN)
 
 
-exports.updateUserDetails = async (req, res, next) => {
+exports.updateUser = async (req, res, next) => {
     const updatedUserData = {
         name : req.body.name,
         email : req.body.email,

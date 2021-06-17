@@ -22,11 +22,11 @@ exports.newProduct = async (req,res,next) => {
 
 // GETTING ALL PRODUCTS
 
-exports.getAllProducts = async (req,res,next) => {
+exports.getProducts = async (req,res,next) => {
 
     const productsPerPage = 3;
     
-    // FE ALERT !! : PRODUCT COUNT //
+    const productsCount = await Product.countDocuments();
 
     const features = new apiFeatures(Product.find(), req.query)
         .search()                                                   // for keyword search
@@ -37,6 +37,7 @@ exports.getAllProducts = async (req,res,next) => {
 
     res.status(200).json ({
         sucess : true,
+        productsCount,
         count : products.length,
         products       
     })
@@ -45,7 +46,7 @@ exports.getAllProducts = async (req,res,next) => {
 
 // GETTING A SINGLE PRODUCT
 
-exports.getOneProduct = async (req,res,next) => {
+exports.getSingleProduct = async (req,res,next) => {
     const product = await Product.findById(req.params.id)
 
     if(!product) {
@@ -60,7 +61,7 @@ exports.getOneProduct = async (req,res,next) => {
 
 // UPDATING A PRODUCT
 
-exports.updateOneProduct = async (req,res,next) => {
+exports.updateProduct = async (req,res,next) => {
     let product = await Product.findById(req.params.id)
 
     if(!product) {
@@ -80,7 +81,7 @@ exports.updateOneProduct = async (req,res,next) => {
 
 // DELETING A PRODUCT
 
-exports.deleteOneProduct = async (req,res,next) => {
+exports.deleteProduct = async (req,res,next) => {
         let product = await Product.findById(req.params.id)
 
     if(!product) {
@@ -98,7 +99,7 @@ exports.deleteOneProduct = async (req,res,next) => {
 // CREATE/UPDATE PRODUCT REVIEW
 
 
-exports.makeProductReview = catchAsyncErrors(async (req,res,next) => {
+exports.createProductReview = catchAsyncErrors(async (req,res,next) => {
     const { rating,comment,productId } = req.body;
 
     const review = {
@@ -165,7 +166,7 @@ exports.getProductReviews = catchAsyncErrors(async (req,res,next) => {
 // DELETE A REVIEW OF A PRODUCT
 
 
-exports.deleteProductReview = catchAsyncErrors(async (req, res, next) => {
+exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
     const product = await Product.findById(req.query.productId);
 
     // avoid the review to be deleted and updates the new reviews array

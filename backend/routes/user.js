@@ -1,27 +1,27 @@
 const express = require('express');
 const router = express.Router();
 
-const { isAutherisedUser, userRoles } = require('../middlewares/verifiedUser')
+const { isAuthenticatedUser, authorizeRoles } = require('../middlewares/auth');
 
-const { registerNewUser, loginUser, logoutUser, forgotPassword, resetPassword, userProfile, updateUserPassword,
-    updateUserProfile, getAllUsers, getSingleUserDetails, updateUserDetails, deleteUser } = require('../controllers/userController');
+const { registerUser, loginUser, logout, forgotPassword, resetPassword, getUserProfile, updatePassword,
+    updateProfile, allUsers, getUserDetails, updateUser, deleteUser } = require('../controllers/authController');
 
 
-router.route('/register').post(registerNewUser);
+router.route('/register').post(registerUser);
 router.route('/login').post(loginUser);
-router.route('/logout').get(logoutUser);
+router.route('/logout').get(logout);
 
 router.route('/password/forgot').post(forgotPassword);
 router.route('/password/reset/:token').put(resetPassword);
 
-router.route('/profile').get(isAutherisedUser,userProfile);
-router.route('/profile/update').put(isAutherisedUser,updateUserProfile);
-router.route('/password/update').put(isAutherisedUser,updateUserPassword);
+router.route('/profile').get(isAuthenticatedUser,getUserProfile);
+router.route('/profile/update').put(isAuthenticatedUser,updateProfile);
+router.route('/password/update').put(isAuthenticatedUser,updatePassword);
 
-router.route('/admin/users').get(isAutherisedUser, userRoles('admin'), getAllUsers);
-router.route('/admin/user/:id').get(isAutherisedUser, userRoles('admin'), getSingleUserDetails);
-router.route('/admin/user/:id').put(isAutherisedUser, userRoles('admin'), updateUserDetails);
-router.route('/admin/user/:id').delete(isAutherisedUser, userRoles('admin'), deleteUser);
+router.route('/admin/users').get(isAuthenticatedUser, authorizeRoles('admin'), allUsers);
+router.route('/admin/user/:id').get(isAuthenticatedUser, authorizeRoles('admin'), getUserDetails);
+router.route('/admin/user/:id').put(isAuthenticatedUser, authorizeRoles('admin'), updateUser);
+router.route('/admin/user/:id').delete(isAuthenticatedUser, authorizeRoles('admin'), deleteUser);
 
 
 

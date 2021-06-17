@@ -63,7 +63,7 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 
 
 // Creating jwt for user
-userSchema.methods.createJwtToken = function() {
+userSchema.methods.getJwtToken = function() {
     return jwt.sign({ id:this._id }, 'ashben2021', {
         expiresIn : '3d'
     });
@@ -71,7 +71,7 @@ userSchema.methods.createJwtToken = function() {
 
 
 // Password Reset Token
-userSchema.methods.generatePasswordResetToken = function () {
+userSchema.methods.getPasswordResetToken = function () {
 
     // Token Genaration
     const resetToken = crypto.randomBytes(20).toString('hex');              // crypto generate random bytes
