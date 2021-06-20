@@ -1,4 +1,5 @@
-import React,{Fragment,useEffect} from 'react'
+import React,{Fragment,useState,useEffect} from 'react'
+import { Carousel } from 'react-bootstrap'
 import MetaData from './layout/MetaData'
 import Product from './product/Product'
 import Loader from './layout/Loader'
@@ -36,7 +37,7 @@ const Home = () => {
                             <section id="products" className="container mt-5">
                             <div className="row">
                                 {products && products.map(product =>(
-                                        <Product  key={product._id}product={product} />
+                                        <Product key={product._id}product={product} />
                             
                                     ))}
                           
