@@ -1,44 +1,51 @@
 import React,{Fragment,useEffect} from 'react'
 import MetaData from './layout/MetaData'
+import Product from './product/Product'
+import Loader from './layout/Loader'
 
 
-import { useDispatch,useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+
+
+import { useAlert } from 'react-alert';
 import {getProducts} from '../actions/productActions'
 
 const Home = () => {
-    const disptach= useDispatch();
+    
+    const alert = useAlert();
+    const disptach = useDispatch();
+    const { loading, products, error, productsCount} = useSelector(state => state.product)
+
     useEffect(()=>{
-        disptach(getProducts())
-    },[disptach])
-    return (
+        if(error){
+            alert.success('success')
+            return alert.error(error)
+        } 
+        disptach(getProducts());
+       
+    },[disptach,alert,error])
+
+    return ( 
         <Fragment>
-            <MetaData title = {'Buy best product online'} />
+            {loading?<Loader/>:(
+                <Fragment>
+                    <MetaData title = {'Buy best product online'} />
 
 
-        <h1 id ="product_heading">Latest Products</h1>
-            <section id="products" className="container mt-5">
-                <div className="row">
-                    <div className="col-sm-12 col-md-6 col-lg-3 my-3">
-                        <div className="card p-3 rounded">
-                            <img className="card-img-top mx-auto"
-                            src="https://images-na.ssl-images-amazon.com/images/I/81NoPCOJh%2BL._SL1500_.jpg"/>
-                    <div className="card-body d-flex flex-column">
-                        <h5 className="card-title">
-                            <a href ="">128 memory card scan disk Ultra </a>
-                        </h5>
-                    <div className="rating mt-auto">
-                        <div className="rating-outer">
-                            <div classNmae="rating-inner"></div>
+                        <h1 id ="product_heading">Latest Products</h1>
+                            <section id="products" className="container mt-5">
+                            <div className="row">
+                                {products && products.map(product =>(
+                                        <Product  key={product._id}product={product} />
+                            
+                                    ))}
+                          
                         </div>
-                        <span id="no_of_reviews">(5 reviews)</span>
-                    </div>
-                    <p className="card-text">Rs 500</p>
-                    <a href="#" id="view_btn" className="btn btn-block">View Details</a>
-                </div>
-                </div>
-            </div>
-        </div>
-        </section>
+                    </section>
+
+                </Fragment>
+            )}
+            
         
     </Fragment>
     )
