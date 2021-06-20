@@ -4,22 +4,30 @@ const catchAsyncErrors = require('../middlewares/catchAsyncErrors.js');
 const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail')
 const crypto = require('crypto');
+const cloudinary = require('cloudinary');
 
 
 
 // NEW USER REGISTRATION
 
 exports.registerUser  = catchAsyncErrors( async(req,res,next) => {
+
+    //Taking prodile image
+    const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+        folder:'avatar',
+        width:150,
+        crop:'scale'
+    });
     
     const { name,email,password } = req.body
 
     const user = await User.create ({
         name,email,password,
-        image : {
-            public_id : 'avatar/pexels-elle-hughes-1680172_blwcs8',
-            url : 'https://res.cloudinary.com/dy0tqwsxl/image/upload/v1623304313/avatar/pexels-elle-hughes-1680172_blwcs8.jpg' 
+        avatar : {
+            public_id : result.public_id,
+            url : result.secure_url
             }
-    })
+    });
 
     
     // calling jwt function
@@ -43,7 +51,7 @@ exports.loginUser  = catchAsyncErrors(async (req,res,next) => {
     };
     
     //search for user in database
-    const user = await User.findOne({email}).select('password')
+    const user = await User.findOne({email}).select('+password')
     
     if(!user) {
         return next(new errorHandler('Invalid User', 401));
@@ -172,26 +180,41 @@ exports.getUserProfile = catchAsyncErrors(async (req,res,next) => {
 
 // UPDATE USER PROFILE DETAILS
 
-exports.updateProfile = catchAsyncErrors(async (req,res,next) =>{
-    const updatedUserData = {
-        name : req.body.name,
-        email : req.body.email
-        //update profile photo is pending
-    };
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+    const newUserData = {
+        name: req.body.name,
+        email: req.body.email
+    }
 
-    const user = await User.findByIdAndUpdate(req.user.id, updatedUserData,
-         {
-    //     new : true,
-    //     runValidators : true,
-        useFindAndModify : false
-     }
-    );
+    // Update avatar
+    if (req.body.avatar !== '') {
+        const user = await User.findById(req.user.id)
+
+        const image_id = user.avatar.public_id;
+        const res = await cloudinary.v2.uploader.destroy(image_id);
+
+        const result = await cloudinary.v2.uploader.upload(req.body.avatar, {
+            folder: 'avatars',
+            width: 150,
+            crop: "scale"
+        })
+
+        newUserData.avatar = {
+            public_id: result.public_id,
+            url: result.secure_url
+        }
+    }
+
+    const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+        new: true,
+        runValidators: true,
+        useFindAndModify: false
+    })
 
     res.status(200).json({
-        success: true,
-        message : 'User profile Updated Successfully'
+        success: true
     })
-});
+})
 
 
 

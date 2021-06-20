@@ -1,14 +1,10 @@
-import{ ALL_PRODUCTS_REQUEST,
-        ALL_PRODUCTS_SUCCESS,
-        ALL_PRODUCTS_FAIL,
-        PRODUCTS_DETAILS_REQUEST,
-        PRODUCTS_DETAILS_SUCCESS,
-        PRODUCTS_DETAILS_FAIL,
+import{ ALL_PRODUCTS_REQUEST, ALL_PRODUCTS_SUCCESS, ALL_PRODUCTS_FAIL,
+        PRODUCT_DETAILS_REQUEST, PRODUCT_DETAILS_SUCCESS, PRODUCT_DETAILS_FAIL,
         CLEAR_ERRORS
     } from '../constants/productConstants'
 
 
-export const productsReducer =( state = { products:[] } ,action) => {
+export const productsReducer =( state = {proudcts:[] } ,action) =>{
     switch(action.type){
         case ALL_PRODUCTS_REQUEST:
             return {
@@ -34,34 +30,34 @@ export const productsReducer =( state = { products:[] } ,action) => {
         default:
             return state;
     }
-}
+};
 
-export const productDetatilsReducer =( state ={product:{}}, action) =>{
-    switch(action.type){
-        case PRODUCTS_DETAILS_REQUEST:
+export const productsDetailsReducer = (state = {product:{}}, action ) => {
+    switch (action.type) {
+        case PRODUCT_DETAILS_REQUEST:
             return{
                 ...state,
-                loading:true
+                loading: true
+            }               
+        case PRODUCT_DETAILS_SUCCESS:
+            return{
+                loading: false,
+                product : action.payload
+            }               
+        case PRODUCT_DETAILS_FAIL:
+            return{
+                loading: false,
+                error: action.payload
             }
-        case PRODUCTS_DETAILS_SUCCESS:
-                return{
-                    
-                    loading:false,
-                    product:action.payload
-                }
-        case PRODUCTS_DETAILS_FAIL:
-                    return{
-                        
-                        ...state,
-                        error:action.payload
-                    }
         case CLEAR_ERRORS:
-                        return {
-                            ...state,
-                            error:null
-                        }
-
+            return {
+                ...state,
+                error:null
+            }            
+    
         default:
-            return state
+            return state;
     }
-}
+};
+
+

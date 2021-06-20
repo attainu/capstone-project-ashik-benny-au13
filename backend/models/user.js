@@ -22,7 +22,7 @@ const userSchema = new mongoose.Schema({
         required : [true, 'Please Enter your password'] ,
         minlength : [5, 'Password needs a minimum charcter length of 5']
     },
-    image : {
+    avatar : {
         public_id: {
             type:String,
             required : true

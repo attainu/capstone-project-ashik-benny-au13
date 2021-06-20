@@ -1,12 +1,16 @@
 const express = require('express');
 const app = express ();
 
-const cookirParser = require('cookie-parser');
+const cookieParser = require('cookie-parser')
+const bodyparser = require('body-parser');
+const fileUpload = require('express-fileupload')
 
 const errorHandleMiddleware = require('./middlewares/errors');
 
 app.use(express.json());
-app.use(cookirParser());
+app.use(bodyparser.urlencoded({ extended:true}));
+app.use(cookieParser());
+app.use(fileUpload());
 
 
 //IMPORT ALL ROUTES

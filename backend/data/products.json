@@ -139,6 +139,31 @@
             }
     ],
         "category" : "Food",
+        "seller" : "Red apple",
+        "stock" : 500,
+        "numOfReviews" : 1,
+        "reviews": []
+    },
+    {
+        "name" : "Kauffman Orchards Homegrown McIntosh Apples",
+        "price" : "2.00",
+        "description" : "McIntosh is a pretty red apple ",
+        "ratings" : 5,
+        "images" : [
+            {
+                "public_id" : "products/wmoa49q9e70ze9xtcra2",
+                "url" : "https://res.cloudinary.com/bookit/image/upload/v1606293153/products/wmoa49q9e70ze9xtcra2.jpg"
+            },
+            {
+                "public_id" : "products/i0k1wdwi5hrpmzwxvsds",
+                "url" : "https://res.cloudinary.com/bookit/image/upload/v1606293152/products/i0k1wdwi5hrpmzwxvsds.jpg" 
+            },
+            {
+                "public_id" : "products/bshmuo9qisfhz4azvnsd",
+                "url" : "https://res.cloudinary.com/bookit/image/upload/v1606293153/products/bshmuo9qisfhz4azvnsd.jpg"
+            }
+    ],
+        "category" : "Food",
         "seller" : "Kauffman's Fruit Farm & Market",
         "stock" : 500,
         "numOfReviews" : 1,
