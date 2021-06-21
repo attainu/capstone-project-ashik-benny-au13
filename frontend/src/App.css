@@ -28,12 +28,13 @@ body {
 }
 
 nav {
-  background-color:rgb(139, 247, 38);
+  background-color:rgba(139, 247, 38, 0.76);
   padding: 1rem 1rem;
+  height: 100px;
 }
 
 #search_btn {
-  background-color: rgb(228, 252, 8);
+  background-color: rgba(245, 245, 245, 0.76);
 }
 
 .input-group {
@@ -49,7 +50,7 @@ nav {
 
 #login_btn,
 #view_btn {
-  background-color: rgb(228, 252, 8);
+  background-color: rgba(245, 245, 245, 0.76);;
   padding: 0.4rem 1.8rem;
   margin-left: 1rem;
   font-family: calibri;
@@ -61,7 +62,7 @@ nav {
 }
 
 #cart_count {
-  background-color: rgb(228, 252, 8);
+  background-color:rgba(245, 245, 245, 0.76);
   padding: 0.2rem 0.5rem;
   border-radius: 0.2rem;
   color: black;
@@ -78,7 +79,7 @@ nav {
 .card {
   height: 100%;
 }
-.card:hover {background-color:rgb(228, 252, 8)}
+.card:hover {background-color:rgba(245, 245, 245, 0.473)}
 
 .card-title a {
   color: #2e2e2e;
@@ -86,7 +87,7 @@ nav {
 }
 
 .card-title a:hover {
-  color: rgb(139, 247, 38);
+  color: rgba(245, 245, 245, 0.473);
   text-decoration: none;
 }
 
@@ -494,7 +495,7 @@ footer {
 }
 
 .page-link:hover {
-  color: rgb(139, 247, 38);
+  color: rgba(245, 245, 245, 0.473);
 }
 
 /* Admin Sidebar */
