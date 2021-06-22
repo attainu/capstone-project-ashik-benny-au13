@@ -24,21 +24,20 @@ exports.newProduct = async (req,res,next) => {
 
 exports.getProducts = async (req,res,next) => {
 
-    const resPerPage = 4;
+    const productsPerPage = 9;
     
     const productsCount = await Product.countDocuments();
 
     const features = new apiFeatures(Product.find(), req.query)
         .search()                                                   // for keyword search
         .filter()                                                   // filter by category/price/ratings etc..
-        .pagination(resPerPage)                                // to decide howmany products need to dsipaly & skip
+        .pagination(productsPerPage)                                // to decide howmany products need to dsipaly & skip
 
     const products = await features.query;
 
     res.status(200).json ({
         sucess : true,
         productsCount,
-        resPerPage,
         count : products.length,
         products       
     })
@@ -74,7 +73,7 @@ exports.updateProduct = async (req,res,next) => {
         useFindAndModify : false
     })
     res.status(200).json({
-        sucess : true, 
+        sucess : true,
         product
     })
 };

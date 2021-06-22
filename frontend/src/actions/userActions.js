@@ -73,22 +73,22 @@ export const login = (email, password) => async (dispatch) => {
 export const loadUser = () => async (dispatch) => {
   try {
 
-    dispatch({ type: LOAD_USER_REQUEST });
+      dispatch({ type: LOAD_USER_REQUEST })
 
-    const { data } = await axios.get("/api/v1/profile");
+      const { data } = await axios.get('/api/v1/profile')
 
-    dispatch({
-      type: LOAD_USER_SUCCESS,
-      payload: data.user,
-    });
+      dispatch({
+          type: LOAD_USER_SUCCESS,
+          payload: data.user
+      })
+
   } catch (error) {
-
-    dispatch({
-      type: LOAD_USER_FAIL,
-      payload: error.response.data.message,
-    });
+      dispatch({
+          type: LOAD_USER_FAIL,
+          payload: error.response.data.message
+      })
   }
-};
+}
 
 
 // UPDATE USER PROFILE
@@ -169,7 +169,8 @@ export const logout = () => async (dispatch) => {
     await axios.get("/api/v1/logout");
 
     dispatch({
-      type: LOGOUT_SUCCESS
+      type: LOGOUT_SUCCESS,
+      product:null
     });
   } catch (error) {
 

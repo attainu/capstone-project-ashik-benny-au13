@@ -79,7 +79,7 @@ exports.logout = catchAsyncErrors(async (req,res,next) => {
             httpOnly : true 
     });
     res.status(200).json({
-        sucess : true,
+        success : true,
         message : 'User Logout Sucessfully'
     });
 });

@@ -1,6 +1,5 @@
-import React, { Fragment, useState,useEffect } from "react";
+import React, { Fragment, useEffect } from "react";
 import MetaData from "./layout/MetaData";
-import Pagination from "react-js-pagination"
 
 import { useDispatch, useSelector } from "react-redux";
 import {useAlert} from 'react-alert';
@@ -11,13 +10,11 @@ import Loader from "../components/layout/Loader";
 
 const Home = () => {
 
-
-  const  [currentPage,setCurrentPage] = useState()
   const dispatch = useDispatch();
   const alert = useAlert();
 
   //loading from state
-  const { loading, products, error, productsCount,resPerPage } = useSelector(
+  const { loading, products, error, productsCount } = useSelector(
     (state) => state.product
   );
 
@@ -27,20 +24,18 @@ const Home = () => {
       return alert.error(error);
     }
 
-    dispatch(getProducts(currentPage));
+    dispatch(getProducts());
 
 
-  }, [dispatch,alert,error,currentPage])
-
-  function setCurrentPageNo(pageNumber){
-      setCurrentPage(pageNumber)
-  }
+  }, [dispatch,alert,error]);
 
 
   return (
     <Fragment>
-      {loading ? (<Loader/>) : (
-        <Fragment>
+      {loading ? (
+        <Loader/>
+      ) : (
+        <>
           <MetaData title={"Get the Best from"} />
 
           <h1 id="product_heading">Get the Best Offer !!</h1>
@@ -49,31 +44,11 @@ const Home = () => {
               {products &&
                 products.map((product) => (
                   <Product key={product.id} product={product} />
-                ))};
+                ))}
+              ;
             </div>
           </section>
-          {resPerPage <=productsCount &&(
-               <div className="d-flex justify-content-center mt-5">
-               <Pagination
-                 activePage={currentPage}
-                 itemCountPerPage={resPerPage}
-                 totalItemsCount={productsCount}
-                 onChange={setCurrentPageNo}
-                 nextPageText={'Next'}
-                 prePageText={'Prev'}
-                 firstPageText={'First'}
-                 lastPageText={'Last'}
-                 itemClass="page-item"
-                 linkClass="page-link"
-                 />
-             </div>
-
-
-
-
-          )}  
-         
-        </Fragment> 
+        </>
       )}
     </Fragment>
   );

@@ -33,7 +33,8 @@ switch (action.type) {
         return {
             loading: false,
             isAuthenticated: false,
-            user: null
+            user: null,
+            
         }
 
     case LOAD_USER_FAIL:

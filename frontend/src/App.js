@@ -1,5 +1,9 @@
 import {BrowserRouter as Router,Route} from  'react-router-dom';
-import {useEffect} from 'react';
+import {useEffect,useState} from 'react';
+import axios from 'axios';
+
+import {Elements} from '@stripe/react-stripe-js';
+import {loadStripe} from '@stripe/stripe-js';
 
 import Header from './components/layout/Header';
 import Footer from './components/layout/Footer';
@@ -13,6 +17,11 @@ import Profile from './components/user/Profile';
 import UpdateProfile from './components/user/UpdateProfile';
 import UpdatePassword from './components/user/UpdatePassword';
 import ForgotPassword from './components/user/ForgotPassword';
+import Cart from './components/cart/Cart';
+// import ListOrders from './components/order/ListOrders';
+import Shipping from './components/cart/Shipping';
+import ConfirmOrder from './components/cart/ConfirmOrders';
+import Payment from './components/cart/Payment';
 
 import {loadUser} from './actions/userActions';
 import store from './store';
@@ -20,9 +29,20 @@ import store from './store';
 
 function App() {
 
+  const[stripeApiKey, setStripeApiKey] = useState('');
+
   // to avoid changing state while refreshing page(user wont logOut)
   useEffect(() => {
     store.dispatch(loadUser());
+
+    // stripe
+    async function getStripeApikey() {
+      const {data} = await axios.get('/api/v1/stripeapi');
+      setStripeApiKey(data.stripeApiKey);
+    }
+
+    getStripeApikey();
+
   },[])
 
 
@@ -40,6 +60,17 @@ function App() {
           < ProtuctedRoute path="/profile/update" component ={UpdateProfile} exact />
           < ProtuctedRoute path="/password/update" component ={UpdatePassword} exact />
           < Route path="/password/forgot" component ={ForgotPassword} exact />
+          < Route path="/cart" component ={Cart} exact />
+          {/* < ProtuctedRoute path="/orders/myOrders" component ={ListOrders} exact /> */}
+          < ProtuctedRoute path="/shipping" component ={Shipping}  />
+          < ProtuctedRoute path="/order/confirm" component ={ConfirmOrder}  />
+
+          {stripeApiKey && 
+            <Elements stripe={loadStripe(stripeApiKey)}>
+              <ProtuctedRoute path="/payment" component ={Payment} />
+            </Elements>
+          }
+
       </div>
      <Footer />
     

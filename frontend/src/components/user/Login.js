@@ -17,20 +17,20 @@ const Login = ({ history, location }) => {
 
   const { isAuthenticated, error, loading } = useSelector( (state) => state.auth );
 
-  // const redirect = location.search ? location.search.split('=')[1] : '/'
+  const redirect = location.search ?  location.search.split('=')[1]  : '/'
 
   useEffect(() => {
 
     // if user is allready logged in,user dnt want to go to login page again.
     if (isAuthenticated) {
-      history.push("/");
+      history.push(redirect);
     }
 
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
     }
-  }, [dispatch, isAuthenticated, error, alert, history]);
+  }, [dispatch, isAuthenticated, error, alert, history, redirect]);
 
 
   const submitHandler = (e) => {
