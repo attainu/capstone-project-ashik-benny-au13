@@ -29,6 +29,8 @@ import Payment from './components/cart/Payment';
 //Admin
 import Dashboard from './components/admin/Dashboard';
 import ProductsList from './components/admin/ProductsList';
+import NewProduct from './components/admin/NewProduct';
+import UpdateProduct from './components/admin/UpdateProduct';
 
 
 import {loadUser} from './actions/userActions';
@@ -81,6 +83,8 @@ function App() {
       </div>
       < ProtuctedRoute path="/dashboard" isAdmin={true} component ={Dashboard} exact />
       < ProtuctedRoute path="/admin/products" isAdmin={true} component ={ProductsList} exact />
+      < ProtuctedRoute path="/admin/product" isAdmin={true} component ={NewProduct} exact />
+      < ProtuctedRoute path="/admin/product/:id" isAdmin={true} component ={UpdateProduct} exact />
      <Footer />
     
     </div>

@@ -20,7 +20,7 @@ const Sidebar = () => {
                             </li>
             
                             <li>
-                        <Link to='/admin/product/new'> Create Product</Link>
+                        <Link to='/admin/product'> Create Product</Link>
                             </li>
                         {/* </ul> */}
                     {/* </li> */}
