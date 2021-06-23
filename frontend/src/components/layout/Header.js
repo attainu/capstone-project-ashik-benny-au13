@@ -27,7 +27,11 @@ const Header = () => {
             <nav className="navbar row">
                 <div className="col-12 col-md-3">
                     <div className="navbar-brand">
-                        {/* <img src= "./logo.png" alt="logo"/> */}
+
+                        <a href="/" >
+                            <img src= "https://res.cloudinary.com/dy0tqwsxl/image/upload/v1624451472/logo/White_with_Barbell_Icon_Fitness_Logo_2_etlca2.png"
+                                alt="logo" className="logo"/>
+                        </a>
                         
                     </div>
                 </div>

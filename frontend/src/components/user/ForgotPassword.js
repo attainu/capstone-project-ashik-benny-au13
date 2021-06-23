@@ -46,10 +46,10 @@ const ForgotPassword = () => {
 
       <div className="row wrapper">
         <div className="col-10 col-lg-5">
-          <form className="shadow-lg" onSubmit={submitHandler}>
-            <h1 className="mb-3">Forgot Password</h1>
-            <div className="form-group">
-              <label htmlFor="email_field">Enter Email</label>
+          <form className="shadow-lg" onSubmit={submitHandler} id="cardBorder">
+            <h1 className="mb-3 greenColor">Forgot Password</h1>
+            <div className="form-group productHead">
+              <label htmlFor="email_field ">Enter Registered Email</label>
               <input
                 type="email"
                 id="email_field"

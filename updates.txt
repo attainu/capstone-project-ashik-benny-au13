@@ -1,0 +1,19 @@
+
+---UPDATED---
+
+1.Added dashboard for admins
+2.In dashboard.admn can see the total products count, out of stock product count.
+3.In dasboard,in products tab,admin can see all products in his stock
+
+
+---PENDING---
+
+1.Add product
+2.delete product
+3.Update product
+
+4.Forgot Password
+
+
+
+( stripe card pin for payment : 4242 4242 4242 4242 )
