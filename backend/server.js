@@ -22,5 +22,3 @@ cloudinary.config({
 const server =  app.listen(PORT, () => {
     console.log(`SERVER START LISTENING ON PORT: ${PORT}`)
 })
-
-

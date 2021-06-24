@@ -69,7 +69,7 @@ const Dashboard = () => {
                     <br /> <b>{products && products.length}</b>
                   </div>
                 </div>
-                <Link className="card-footer text-success small z-1" to="#">
+                <Link to='/admin/products' className="card-footer text-success small z-1">
                   <span className="float-left">View Details</span>
                   <span className="float-right">
                     <i className="fa fa-angle-right"></i>
@@ -78,15 +78,15 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="col-xl-3 col-sm-6 mb-3">
+            {/* <div className="col-xl-3 col-sm-6 mb-3">
               <div className="card text-black bg-Light o-hidden h-100 dashboardCard">
                 <div className="card-body">
                   <div className="text-center card-font-size">
                     Orders
                     <br /> <b>Coming Soon</b>
                   </div>
-                </div>
-                <Link
+                </div> */}
+                {/* <Link
                   className="card-footer text-success small z-1"
                   to="/admin/orders"
                 >
@@ -116,7 +116,7 @@ const Dashboard = () => {
                   </span>
                 </Link>
               </div>
-            </div>
+            </div> */}
 
             <div className="col-xl-3 col-sm-6 mb-3 ">
               <div className="card text-white  o-hidden h-100 dashboardCard">

@@ -77,8 +77,6 @@ const Payment = ({ history }) => {
 
       const clientSecret = res.data.client_secret;
 
-      // console.log(clientSecret);
-
       if (!stripe || !elements) {
         return;
       }
@@ -107,8 +105,8 @@ const Payment = ({ history }) => {
           };
 
           dispatch(createOrder(order));
-
-          history.push("/success");
+          alert.success('Your Order was successful')
+          history.push("/");
 
         } else {
           alert.error("There is some issue while payment processing");
