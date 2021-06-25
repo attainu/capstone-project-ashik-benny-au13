@@ -29,8 +29,9 @@ body {
 
 /* navbar */
 .logo{
-  width: 80px;
-  height: 50px;
+  
+  height: 80px;
+  padding-left: 100%;
 }
 
 nav {
@@ -571,6 +572,10 @@ footer {
 
 
 /* Products List Admin */
+
+.table{
+  color:white;
+}
 
 #products_table .btn {
   padding: 0.2rem 0.5rem;
