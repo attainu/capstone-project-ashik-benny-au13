@@ -10,18 +10,21 @@ import{ ALL_PRODUCTS_REQUEST, ALL_PRODUCTS_SUCCESS, ALL_PRODUCTS_FAIL,
 
 
 // GET ALL PRODUCTS
-export const getProducts = ()=> async(dispatch) =>{
+export const getProducts = ( keyword = '', currentPage = 1, price, category )=> async(dispatch) =>{
     try{
-        dispatch( { type:ALL_PRODUCTS_REQUEST })
+        dispatch( { type:ALL_PRODUCTS_REQUEST });
 
-        const { data } =  await axios.get('/api/v1/products')
+        let linkRequest = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[lte]=${price[1]}&price[gte]=${price[0]}`;
+
+
+        const { data } =  await axios.get(linkRequest)
         dispatch({
 
             type:ALL_PRODUCTS_SUCCESS,
             payload:data
         })
 
-    }catch(error){
+    }catch(error) {
         dispatch({
             type:ALL_PRODUCTS_FAIL,
             payload:error.response.data.message 

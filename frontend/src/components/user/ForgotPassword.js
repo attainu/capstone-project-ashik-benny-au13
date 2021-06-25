@@ -10,7 +10,7 @@ import {
   loadUser,
 } from "../../actions/userActions";
 
-const ForgotPassword = () => {
+const ForgotPassword = ({history}) => {
   const [email, setEmail] = useState("");
 
   const alert = useAlert();
@@ -37,6 +37,7 @@ const ForgotPassword = () => {
     formData.set("email", email);
 
     dispatch(forgotPassword(formData));
+    history.push('/')
   };
 
 

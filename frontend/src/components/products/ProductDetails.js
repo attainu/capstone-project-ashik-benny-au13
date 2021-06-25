@@ -132,7 +132,7 @@ const decreaseQty = () => {
                 Manufacturer : <strong>{product.seller}</strong>
               </p>
 
-              <button
+              {/* <button
                 id="review_btn"
                 type="button"
                 className="btn btn-primary mt-4" 
@@ -140,7 +140,7 @@ const decreaseQty = () => {
                 data-target="#ratingModal"
               >
                 Post a Review
-              </button>
+              </button> */}
 
               <div className="row mt-2 mb-5">
                 <div className="rating w-50">
