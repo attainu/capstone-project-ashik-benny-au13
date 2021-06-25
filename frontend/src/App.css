@@ -29,9 +29,8 @@ body {
 
 /* navbar */
 .logo{
-  
-  height: 80px;
-  padding-left: 100%;
+  width: 80px;
+  height: 50px;
 }
 
 nav {
@@ -512,8 +511,8 @@ footer {
 
 /* Pagination */
 .page-item.active .page-link {
-  background-color: #fa9c23;
-  border-color: #fa9c23;
+  background-color: rgb(139, 247, 38);
+  border-color: black;
 }
 
 .page-link {
@@ -573,10 +572,6 @@ footer {
 
 /* Products List Admin */
 
-.table{
-  color:white;
-}
-
 #products_table .btn {
   padding: 0.2rem 0.5rem;
   margin-left: 0.4rem;
@@ -600,30 +595,6 @@ footer {
   font-size: 1.2rem;
 }
 
-/* Reviews
-
-.rating {
-  margin-top: 10rem;
-}
-
-.stars {
-  height: 100px;
-  display: flex;
-  align-items: center;
-  padding-left: 0;
-}
-
-.star {
-  display: inline;
-  list-style: none;
-  font-size: 3rem;
-  padding-left: 0.9rem;
-  color: #e3e3e3;
-}
-
-.star:first-child {
-  padding-left: 0;
-} */
 
 .orange {
   color: #fa9c23;

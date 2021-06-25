@@ -2,8 +2,11 @@ const app = require('./app');
 const cloudinary = require('cloudinary');
 const connectDatabase = require('./config/dataBase');
 
-const PORT = process.env.PORT || 7777
+// configure .env
+if (process.env.NODE_ENV !== 'PRODUCTION') require('dotenv').config({path : './config/config.env' })
 
+const PORT = process.env.PORT 
+const NODE_ENV = process.env.NODE_ENV
 
 // DATABASE CONNECTION
 connectDatabase()
@@ -17,6 +20,7 @@ cloudinary.config({
 });
 
 
-const server =  app.listen(PORT, () => {
-    console.log(`SERVER START LISTENING ON PORT: ${PORT}`)
+
+const server = app.listen(PORT, () => {
+    console.log(`Server started on PORT: ${PORT} in ${NODE_ENV} mode.`)
 })

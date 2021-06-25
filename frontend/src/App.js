@@ -36,6 +36,7 @@ import UpdateProduct from './components/admin/UpdateProduct';
 
 import {loadUser} from './actions/userActions';
 import store from './store';
+import { useSelector } from 'react-redux';
 
 
 function App() {
@@ -55,6 +56,8 @@ function App() {
     getStripeApikey();
 
   },[])
+
+  const {isAuthenticatedUser,user,loading}  = useSelector((state=>state.auth))
 
 
   return (
@@ -87,7 +90,12 @@ function App() {
       < ProtuctedRoute path="/admin/products" isAdmin={true} component ={ProductsList} exact />
       < ProtuctedRoute path="/admin/product" isAdmin={true} component ={NewProduct} exact />
       < ProtuctedRoute path="/admin/product/:id" isAdmin={true} component ={UpdateProduct} exact />
-     <Footer />
+
+          {!loading && (!isAuthenticatedUser || user.role !== 'admin') && (
+                   <Footer />
+          )}
+
+
     
     </div>
     </Router>
