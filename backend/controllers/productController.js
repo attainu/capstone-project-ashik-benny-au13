@@ -208,42 +208,42 @@ exports.createProductReview = catchAsyncErrors(async (req, res, next) => {
 
 // GET ALL REVIEWS OF A SINGLE PRODUCT
 
-exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.query.id);
+// exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
+//   const product = await Product.findById(req.query.id);
 
-  res.status(200).json({
-    sucess: true,
-    reviews: product.reviews,
-  });
-});
+//   res.status(200).json({
+//     sucess: true,
+//     reviews: product.reviews,
+//   });
+// });
 
 // DELETE A REVIEW OF A PRODUCT
 
-exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.query.productId);
+// exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
+//   const product = await Product.findById(req.query.productId);
 
-  // avoid the review to be deleted and updates the new reviews array
-  const reviews = product.reviews.filter(
-    (review) => review._id.toString() !== req.query.id.toString()
-  );
+//   // avoid the review to be deleted and updates the new reviews array
+//   const reviews = product.reviews.filter(
+//     (review) => review._id.toString() !== req.query.id.toString()
+//   );
 
-  const numOfReviews = reviews.length;
+//   const numOfReviews = reviews.length;
 
-  const ratings =
-    product.reviews.reduce((acc, item) => item.rating + acc, 0) /
-    reviews.length;
+//   const ratings =
+//     product.reviews.reduce((acc, item) => item.rating + acc, 0) /
+//     reviews.length;
 
-  //update product
-  await Product.findByIdAndUpdate(
-    req.query.productId,
-    { reviews, ratings, numOfReviews },
-    {
-      useFindAndModify: false,
-    }
-  );
+//   //update product
+//   await Product.findByIdAndUpdate(
+//     req.query.productId,
+//     { reviews, ratings, numOfReviews },
+//     {
+//       useFindAndModify: false,
+//     }
+//   );
 
-  res.status(200).json({
-    success: true,
-    message: "Product Review Deleted successfully",
-  });
-});
+//   res.status(200).json({
+//     success: true,
+//     message: "Product Review Deleted successfully",
+//   });
+// });

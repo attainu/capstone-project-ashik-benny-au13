@@ -58,6 +58,7 @@ const decreaseQty = () => {
 
   return (
     <Fragment>
+      <MetaData title={"Product Details Page"} />
       {loading ? (
         <Loader />
       ) : (
@@ -65,7 +66,6 @@ const decreaseQty = () => {
           <div className="row f-flex justify-content-around">
             <div className="col-12 col-lg-5 img-fluid" id="product_image">
 
-              {/* for sliding product images */}
               <Carousel pause='hover' >           
                 {product.images && product.images.map(image => (
                   <Carousel.Item key={image.public_id}>
@@ -131,16 +131,6 @@ const decreaseQty = () => {
               <p id="product_seller mb-3" className=" productHead">
                 Manufacturer : <strong>{product.seller}</strong>
               </p>
-
-              {/* <button
-                id="review_btn"
-                type="button"
-                className="btn btn-primary mt-4" 
-                data-toggle="modal"
-                data-target="#ratingModal"
-              >
-                Post a Review
-              </button> */}
 
               <div className="row mt-2 mb-5">
                 <div className="rating w-50">

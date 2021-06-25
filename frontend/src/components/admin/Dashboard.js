@@ -2,7 +2,6 @@ import React, { useEffect, Fragment } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import Loader from "../layout/Loader";
 import Metadata from "../layout/MetaData";
 import Sidebar from "./Sidebar";
 
@@ -29,6 +28,7 @@ const Dashboard = () => {
 
   return (
     <Fragment>
+      <Metadata title={"DashBoard"} />
       <div className="row">
         <div className="col-12 col-md-2">
           <h4>
@@ -77,46 +77,6 @@ const Dashboard = () => {
                 </Link>
               </div>
             </div>
-
-            {/* <div className="col-xl-3 col-sm-6 mb-3">
-              <div className="card text-black bg-Light o-hidden h-100 dashboardCard">
-                <div className="card-body">
-                  <div className="text-center card-font-size">
-                    Orders
-                    <br /> <b>Coming Soon</b>
-                  </div>
-                </div> */}
-                {/* <Link
-                  className="card-footer text-success small z-1"
-                  to="/admin/orders"
-                >
-                  <span className="float-left">View Details</span>
-                  <span className="float-right">
-                    <i className="fa fa-angle-right"></i>
-                  </span>
-                </Link>
-              </div>
-            </div>
-
-            <div className="col-xl-3 col-sm-6 mb-3">
-              <div className="card text-black  o-hidden h-100 dashboardCard">
-                <div className="card-body">
-                  <div className="text-center card-font-size">
-                    Users
-                    <br /> <b>Coming Soon</b>
-                  </div>
-                </div>
-                <Link
-                  className="card-footer text-success small z-1"
-                  to="/admin/users"
-                >
-                  <span className="float-left">View Details</span>
-                  <span className="float-right">
-                    <i className="fa fa-angle-right"></i>
-                  </span>
-                </Link>
-              </div>
-            </div> */}
 
             <div className="col-xl-3 col-sm-6 mb-3 ">
               <div className="card text-white  o-hidden h-100 dashboardCard">

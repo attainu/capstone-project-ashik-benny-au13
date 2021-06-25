@@ -1,10 +1,9 @@
-import React, { Fragment, useState, useEffect } from 'react'
+import React, { Fragment, useState, useEffect } from 'react';
+import { useAlert } from 'react-alert';
+import { useDispatch, useSelector } from 'react-redux';
 
 import MetaData from '../layout/MetaData'
-
-import { useAlert } from 'react-alert'
-import { useDispatch, useSelector } from 'react-redux'
-import { updatePassword, clearErrors, loadUser } from '../../actions/userActions'
+import { updatePassword, clearErrors } from '../../actions/userActions'
 import { UPDATE_PASSWORD_RESET } from '../../constants/userConstants'
 
 const UpdatePassword = ({ history }) => {
@@ -39,12 +38,13 @@ const UpdatePassword = ({ history }) => {
         formData.set('password', password);
 
         dispatch(updatePassword(formData))
+        alert.success('Password Updated')
         history.push('/profile')
     }
 
     return (
         <Fragment>
-            <MetaData title={'Change Password'} />
+            <MetaData title={'Update Password'} />
 
             <div className="row wrapper">
                 <div className="col-10 col-lg-5">

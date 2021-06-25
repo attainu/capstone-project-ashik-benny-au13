@@ -1,10 +1,11 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { useAlert } from "react-alert";
+import { useDispatch, useSelector } from "react-redux";
 
 import MetaData from "../layout/MetaData";
 import Sidebar from "./Sidebar";
 
-import { useAlert } from "react-alert";
-import { useDispatch, useSelector } from "react-redux";
+
 import {
   updateProduct,
   getProductDetails,
@@ -139,13 +140,14 @@ const UpdateProduct = ({ match, history }) => {
           <Fragment>
             <div className="wrapper my-5">
               <form
+                id="cardBorder"
                 className="shadow-lg"
                 onSubmit={submitHandler}
                 encType="multipart/form-data"
               >
-                <h1 className="mb-4">Update Product</h1>
+                <h1 className="mb-4 greenColor">Update Product</h1>
 
-                <div className="form-group">
+                <div className="form-group productHead">
                   <label htmlFor="name_field">Name</label>
                   <input
                     type="text"
@@ -156,7 +158,7 @@ const UpdateProduct = ({ match, history }) => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group productHead">
                   <label htmlFor="price_field">Price</label>
                   <input
                     type="text"
@@ -167,7 +169,7 @@ const UpdateProduct = ({ match, history }) => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group productHead">
                   <label htmlFor="description_field">Description</label>
                   <textarea
                     className="form-control"
@@ -178,7 +180,7 @@ const UpdateProduct = ({ match, history }) => {
                   ></textarea>
                 </div>
 
-                <div className="form-group">
+                <div className="form-group productHead">
                   <label htmlFor="category_field">Category</label>
                   <select
                     className="form-control"
@@ -193,7 +195,7 @@ const UpdateProduct = ({ match, history }) => {
                     ))}
                   </select>
                 </div>
-                <div className="form-group">
+                <div className="form-group productHead">
                   <label htmlFor="stock_field">Stock</label>
                   <input
                     type="number"
@@ -204,7 +206,7 @@ const UpdateProduct = ({ match, history }) => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group productHead">
                   <label htmlFor="seller_field">Seller Name</label>
                   <input
                     type="text"
@@ -215,7 +217,7 @@ const UpdateProduct = ({ match, history }) => {
                   />
                 </div>
 
-                <div className="form-group">
+                <div className="form-group productHead">
                   <label>Images</label>
 
                   <div className="custom-file">

@@ -238,74 +238,74 @@ exports.updatePassword = catchAsyncErrors(async (req, res, next) => {
 
 // GET ALL USERS (BY ADMIN)
 
-exports.allUsers = catchAsyncErrors(async (req,res,next) => {
-    const users = await User.find();
+// exports.allUsers = catchAsyncErrors(async (req,res,next) => {
+//     const users = await User.find();
 
-    res.status(200).json({
-        sucess : true,
-        TotalUsers : users.length,
-        users
-    });
-});
+//     res.status(200).json({
+//         sucess : true,
+//         TotalUsers : users.length,
+//         users
+//     });
+// });
 
 
 
 // GET SINGLE USER DETAILS (BY ADMIN)
 
-exports.getUserDetails = catchAsyncErrors(async (req,res,next) => {
-    const user = await User.findById(req.params.id);
+// exports.getUserDetails = catchAsyncErrors(async (req,res,next) => {
+//     const user = await User.findById(req.params.id);
 
-    if(!user) {
-        return next(new errorHandler('User not found'), 404);
-    };
+//     if(!user) {
+//         return next(new errorHandler('User not found'), 404);
+//     };
 
-    res.status(200).json({
-        sucess : true,
-        message : 'User details found',
-        user
-    });
-});
+//     res.status(200).json({
+//         sucess : true,
+//         message : 'User details found',
+//         user
+//     });
+// });
 
 
 
 // UPDATE USER DETAILS (BY ADMIN)
 
 
-exports.updateUser = async (req, res, next) => {
-    const updatedUserData = {
-        name : req.body.name,
-        email : req.body.email,
-        role : req.body.role
-    };
-    const user = await User.findByIdAndUpdate(req.params.id, updatedUserData, {
+// exports.updateUser = async (req, res, next) => {
+//     const updatedUserData = {
+//         name : req.body.name,
+//         email : req.body.email,
+//         role : req.body.role
+//     };
+//     const user = await User.findByIdAndUpdate(req.params.id, updatedUserData, {
 
-        useFindAndModify: false
-    })
-    res.status(200).json({
-        sucess: true,
-        message : 'User updated successfully'
-    });
-};
+//         useFindAndModify: false
+//     })
+//     res.status(200).json({
+//         sucess: true,
+//         message : 'User updated successfully'
+//     });
+// };
 
 
 
 // DELETE USER (BY ADMIN)
 
-exports.deleteUser = catchAsyncErrors(async (req,res,next) => {
-    const user = await User.findById(req.params.id);
+// exports.deleteUser = catchAsyncErrors(async (req,res,next) => {
+//     const user = await User.findById(req.params.id);
 
-    if(!user) {
-        return next(new errorHandler('User Not Found'),404);
-    };
+//     if(!user) {
+//         return next(new errorHandler('User Not Found'),404);
+//     };
 
-    await user.remove();
+//     await user.remove();
 
-    // Need to remove image also
+//     // Need to remove image also
 
-    res.status(200).json({
-        sucess: true,
-        message : 'User deleted successfully'
-    });
-});
+//     res.status(200).json({
+//         sucess: true,
+//         message : 'User deleted successfully'
+//     });
+// });
 
 

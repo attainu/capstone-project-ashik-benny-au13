@@ -1,10 +1,9 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import MetaData from "../layout/MetaData";
 import CheckoutSteps from "./CheckoutSteps";
-
-import { useSelector } from "react-redux";
 
 const ConfirmOrder = ({ history }) => {
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
@@ -17,7 +16,7 @@ const ConfirmOrder = ({ history }) => {
   );
   const shippingPrice = itemsPrice > 10000 ? 0 : 200;
   const taxPrice = Number((0.02 * itemsPrice).toFixed(2));
-  const totalPrice = (itemsPrice + shippingPrice + taxPrice);
+  const totalPrice = itemsPrice + shippingPrice + taxPrice;
 
   const processToPayment = () => {
     const data = {
@@ -27,11 +26,10 @@ const ConfirmOrder = ({ history }) => {
       totalPrice,
     };
 
-    // storing the order details in session storage for the further payment 
+    // storing the order details in session storage for the further payment
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
     history.push("/payment");
   };
-
 
   return (
     <Fragment>
@@ -46,7 +44,7 @@ const ConfirmOrder = ({ history }) => {
             <b>Name :</b> {user && user.name}
           </p>
           <p className="productHead">
-            <b >Phone Number :</b> {shippingInfo.phoneNo}
+            <b>Phone Number :</b> {shippingInfo.phoneNo}
           </p>
           <p className="mb-4 productHead">
             <b>Address :</b>{" "}
@@ -59,14 +57,24 @@ const ConfirmOrder = ({ history }) => {
           {cartItems.map((item) => (
             <Fragment>
               <hr />
-              <div className="cart-item my-1" key={item.product} >
+              <div className="cart-item my-1" key={item.product}>
                 <div className="row">
                   <div className="col-4 col-lg-2">
-                    <img src={item.image} alt="product" height="50" width="65" />
+                    <img
+                      src={item.image}
+                      alt="product"
+                      height="50"
+                      width="65"
+                    />
                   </div>
 
                   <div className="col-5 col-lg-6 ">
-                    <Link to={`/product/${item.product}`} style={{textDecoration:'none',color:'white'}}>{item.name}</Link>
+                    <Link
+                      to={`/product/${item.product}`}
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
+                      {item.name}
+                    </Link>
                   </div>
 
                   <div className="col-4 col-lg-4 mt-4 mt-lg-0 productHead">
@@ -83,25 +91,26 @@ const ConfirmOrder = ({ history }) => {
         </div>
 
         <div className="col-12 col-lg-3 my-4">
-          <div id="order_summary" >
+          <div id="order_summary">
             <h4 className="greenColor">Order Summary</h4>
             <hr />
-            <p className='productHead'>
+            <p className="productHead">
               Subtotal :
               <span className="order-summary-values">Rs {itemsPrice}</span>
             </p>
-            <p className='productHead'>
+            <p className="productHead">
               Shipping Charge :
               <span className="order-summary-values">Rs {shippingPrice}</span>
             </p>
-            <p className='productHead'>
+            <p className="productHead">
               GST : <span className="order-summary-values">Rs {taxPrice}</span>
             </p>
 
-            <hr  />
+            <hr />
 
-            <p className='greenColor'>
-              Total: <span className="order-summary-values ">Rs {totalPrice}</span>
+            <p className="greenColor">
+              Total:{" "}
+              <span className="order-summary-values ">Rs {totalPrice}</span>
             </p>
 
             <hr />

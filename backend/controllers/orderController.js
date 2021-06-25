@@ -31,36 +31,36 @@ exports.createNewOrder = catchAsyncErrors(async (req,res,next) => {
 // TO SEE THE SINGLE ORDER DETAILS
 
 
-exports.getSingleOrder  = catchAsyncErrors(async (req,res,next) => {
+// exports.getSingleOrder  = catchAsyncErrors(async (req,res,next) => {
 
-    const order = await Order.findById(req.params.id).populate('user', 'name email');
+//     const order = await Order.findById(req.params.id).populate('user', 'name email');
 
-    if(!order) {
-        return next(new errorHandler('No orders found for this user', 404))
-    };
-    res.status(200).json({
-        sucess: true,
-        order
-    });
+//     if(!order) {
+//         return next(new errorHandler('No orders found for this user', 404))
+//     };
+//     res.status(200).json({
+//         sucess: true,
+//         order
+//     });
 
-});
+// });
 
 
 
 // TO SEE OWN ORDERS
 
 
-exports.myOrders  = catchAsyncErrors(async (req,res,next) => {
+// exports.myOrders  = catchAsyncErrors(async (req,res,next) => {
 
-    const orders = await Order.find({ id: req.user.id })
-    // const orders = await Order.find()
+//     const orders = await Order.find({ id: req.user.id })
+//     // const orders = await Order.find()
 
-    res.status(200).json({
-        success: true,
-        orders
-    });
+//     res.status(200).json({
+//         success: true,
+//         orders
+//     });
 
-});
+// });
 
 
 // GET ALL ORDERS & TOTAL PRICE (BY ADMIN)

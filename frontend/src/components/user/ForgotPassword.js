@@ -1,13 +1,12 @@
 import React, { Fragment, useState, useEffect } from "react";
+import { useAlert } from "react-alert";
+import { useDispatch, useSelector } from "react-redux";
 
 import MetaData from "../layout/MetaData";
 
-import { useAlert } from "react-alert";
-import { useDispatch, useSelector } from "react-redux";
 import {
   forgotPassword,
-  clearErrors,
-  loadUser,
+  clearErrors
 } from "../../actions/userActions";
 
 const ForgotPassword = ({history}) => {

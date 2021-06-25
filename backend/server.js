@@ -1,7 +1,5 @@
 const app = require('./app');
 const cloudinary = require('cloudinary');
-// const bodyparser = require('body-parser');
-// app.use(bodyparser.urlencoded({ extended:true}))
 const connectDatabase = require('./config/dataBase');
 
 const PORT = process.env.PORT || 7777

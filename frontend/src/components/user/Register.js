@@ -28,7 +28,6 @@ const Register = ({ history }) => {
     (state) => state.auth
   );
 
-  // const redirect = location.search ? location.search.split('=')[1] : '/'
 
   useEffect(() => {
     // if user is allready logged in,user dnt want to go to login page again.

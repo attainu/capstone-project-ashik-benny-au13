@@ -8,8 +8,8 @@ const { createNewOrder, getSingleOrder, myOrders,
 
 
 router.route('/order/new').post(isAuthenticatedUser, createNewOrder);
-router.route('/order/:id').get(isAuthenticatedUser, getSingleOrder);
-router.route('/orders/myOrders').get(isAuthenticatedUser, myOrders);
+// router.route('/order/:id').get(isAuthenticatedUser, getSingleOrder);
+// router.route('/orders/myOrders').get(isAuthenticatedUser, myOrders);
 
 router.route('/admin/allOrders').get(isAuthenticatedUser, authorizeRoles('admin') , allOrders);
 router.route('/admin/order/:id').put(isAuthenticatedUser, authorizeRoles('admin') , updateOrder);

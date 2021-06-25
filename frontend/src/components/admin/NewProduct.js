@@ -1,12 +1,9 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-
-import MetaData from "../layout/MetaData";
-import Loader from "../layout/Loader";
-import Sidebar from "./Sidebar";
-
 import { useAlert } from "react-alert";
 import { useDispatch, useSelector } from "react-redux";
+
+import MetaData from "../layout/MetaData";
+import Sidebar from "./Sidebar";
 import { newProducts, ClearErrors } from "../../actions/productActions";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
 

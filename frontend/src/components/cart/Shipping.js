@@ -1,10 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
-import { Link } from "react-router-dom";
 import { countries } from "countries-list";
 
-import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
 import { saveShippingDetails } from "../../actions/cartActions";
 import {CheckoutSteps} from './CheckoutSteps';

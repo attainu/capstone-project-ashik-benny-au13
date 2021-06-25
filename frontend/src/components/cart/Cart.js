@@ -1,9 +1,7 @@
 import React, { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
 import { Link } from "react-router-dom";
 
-import Loader from "../layout/Loader";
 import MetaData from "../layout/MetaData";
 import { addItemToCart, deleteItemFromCart } from "../../actions/cartActions";
 
@@ -33,9 +31,8 @@ const Cart = ({ history }) => {
   };
 
   const checkoutHandler = () => {
-    history.push('/login?redirect=shipping')
-}
-
+    history.push("/login?redirect=shipping");
+  };
 
   return (
     <Fragment>
@@ -43,8 +40,7 @@ const Cart = ({ history }) => {
 
       {cartItems.length === 0 ? (
         <>
-        <h2 className=" greenColor oops_head">Oops !! Your Cart is Empty</h2>
-        
+          <h2 className=" greenColor oops_head">Oops !! Your Cart is Empty</h2>
         </>
       ) : (
         <Fragment>
@@ -69,8 +65,14 @@ const Cart = ({ history }) => {
                         />
                       </div>
 
-                      <div className="col-5 col-lg-3 " >
-                        <Link to={`/product/${item.product}`} style={{textDecoration:'none',color:'white'}} > {item.name} </Link>
+                      <div className="col-5 col-lg-3 ">
+                        <Link
+                          to={`/product/${item.product}`}
+                          style={{ textDecoration: "none", color: "white" }}
+                        >
+                          {" "}
+                          {item.name}{" "}
+                        </Link>
                       </div>
 
                       <div className="col-4 col-lg-2 mt-4 mt-lg-0 ">
@@ -114,7 +116,9 @@ const Cart = ({ history }) => {
                         <i
                           id="delete_cart_item"
                           className="fa fa-trash btn btn-danger"
-                          onClick={()=>{deleteItemHandler(item.product)}}
+                          onClick={() => {
+                            deleteItemHandler(item.product);
+                          }}
                         ></i>
                       </div>
                     </div>
@@ -131,18 +135,28 @@ const Cart = ({ history }) => {
                 <p className="productHead">
                   No. of Prducts :
                   <span className="order-summary-values">
-                    {cartItems.reduce((acc, item) => (acc + Number(item.quantity)), 0)}
+                    {cartItems.reduce(
+                      (acc, item) => acc + Number(item.quantity),
+                      0
+                    )}
                   </span>
                 </p>
                 <p className="productHead">
                   Total Price (Rs) :
                   <span className="order-summary-values">
-                  {cartItems.reduce((acc, item) => acc + item.quantity * item.price, 0)}           
-                  </span>                 
+                    {cartItems.reduce(
+                      (acc, item) => acc + item.quantity * item.price,
+                      0
+                    )}
+                  </span>
                 </p>
 
                 <hr />
-                <button id="checkout_btn" className="btn  btn-block" onClick={checkoutHandler}>
+                <button
+                  id="checkout_btn"
+                  className="btn  btn-block"
+                  onClick={checkoutHandler}
+                >
                   Check out
                 </button>
               </div>

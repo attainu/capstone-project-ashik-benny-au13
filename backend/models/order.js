@@ -24,11 +24,6 @@ const orderSchema = new mongoose.Schema({
             ref : 'Product'
         }
     }],
-    // product: {
-    //     type : mongoose.Schema.Types.ObjectId,
-    //     required : true,
-    //     ref : 'Product'
-    // },
     itemsPrice: { 
         type : Number,
         required : true,

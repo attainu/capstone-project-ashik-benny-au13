@@ -1,6 +1,5 @@
 import {ADD_TO_CART, DELETE_FROM_CART, SAVE_SHIPPING_INFO} from "../constants/cartConstants";
 
-import React from 'react'
 
 export const cartReducer = (state = { cartItems: [], shippingDetails: {} }, action) => {
     switch (action.type) {

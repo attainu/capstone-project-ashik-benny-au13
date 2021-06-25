@@ -36,17 +36,7 @@ const Profile = () => {
 
               <h4>Email Address :</h4>
               <p className="productHead">{user.email}</p>
-              <br/>
-              
-              {/* <h4>You have joined here on :</h4>
-              <p>{ String(user.createdAt).substring(0,10) }</p> */}
-
-              {/* {user.role !== 'admin' && (
-                  <Link to="/orders/myOrders" className="btn btn-success btn-block mt-5">
-                  All My Orders
-                </Link>
-              )} */}
-              
+              <br/>             
               <Link to="/password/update" className="btn btn-danger btn-block mt-3">
                 Change Password
               </Link>

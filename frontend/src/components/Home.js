@@ -10,7 +10,7 @@ import { getProducts } from "../actions/productActions";
 import Product from "./products/Product";
 import Loader from "../components/layout/Loader";
 
-// Pricr filter
+// Price filter
 const { createSliderWithTooltip } = slider;
 const Range = createSliderWithTooltip(slider.Range);
 
@@ -45,9 +45,9 @@ const Home = ({ match }) => {
         <Loader />
       ) : (
         <>
-          <MetaData title={"Get the Best from"} />
+          <MetaData title={"Get the Best from Gym Div"} />
 
-          <h1 id="product_heading">Get the Best Offer !!</h1>
+          <h1 id="product_heading">Get the Best Gym Equipments !!</h1>
           <section id="products" className="container mt-5">
             <div className="row">
               {keyword ? (
@@ -55,10 +55,10 @@ const Home = ({ match }) => {
                   <div className="col-6 col-med-3 t-5 mb-5">
                     <div className="px5">
                       <Range
-                        marks={{ 1: "Rs. 1", 100000: "Rs. 100000" }}
+                        marks={{ 1: "Rs. 1", 50000: "Rs. 50000" }}
                         min={1}
-                        max={100000}
-                        defaultValue={[1, 100000]}
+                        max={50000}
+                        defaultValue={[1, 50000]}
                         tipFormatter={(value) => `Rs${value}`}
                         tipProps={{ placement: "top", visible: true }}
                         value={price}
